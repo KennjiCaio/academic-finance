@@ -1,9 +1,11 @@
 import express from 'express';
-import router from './modules/auth/auth.routes';
+import authRouter from './modules/auth/auth.routes';
+import studentRouter from './modules/students/students.routes';
 
 const app = express();
 
 app.use(express.json());
-app.use('/api/auth', router);
+app.use('/api', authRouter);
+app.use('/api/me', studentRouter);
 
 export default app;

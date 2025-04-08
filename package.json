@@ -1,0 +1,40 @@
+{
+  "name": "academic-finance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "ts-node src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KennjiCaio/academic-finance.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KennjiCaio/academic-finance/issues"
+  },
+  "homepage": "https://github.com/KennjiCaio/academic-finance#readme",
+  "dependencies": {
+    "@prisma/client": "^6.5.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^6.5.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

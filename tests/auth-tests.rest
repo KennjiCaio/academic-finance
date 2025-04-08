@@ -1,0 +1,27 @@
+### 1. Registrar novo usuário
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Ana Silva",
+  "email": "ana@exemplo.com",
+  "password": "senhaSegura123"
+}
+
+### 2. Login com credenciais válidas
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ana@exemplo.com",
+  "password": "senhaSegura123"
+}
+
+### 3. Login com credenciais inválidas (TESTE DE ERRO)
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ana@exemplo.com",
+  "password": "senhaErrada"
+}

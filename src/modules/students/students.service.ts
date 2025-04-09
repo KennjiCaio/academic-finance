@@ -40,7 +40,7 @@ export async function updateStudent(
     updateData.password = await bcrypt.hash(data.password, 10);
   }
 
-  return await prisma.student.update({
+  return prisma.student.update({
     where: { id: studentId },
     data: updateData,
     select: {

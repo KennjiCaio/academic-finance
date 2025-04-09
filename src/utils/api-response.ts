@@ -8,6 +8,14 @@ export class ApiError extends Error {
   ) {
     super(message);
   }
+
+  public send(res: Response) {
+    res.status(this.statusCode).json({
+      success: false,
+      message: this.message,
+      data: this.data,
+    })
+  }
 }
 
 export class ApiResponse {

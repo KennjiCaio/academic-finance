@@ -1,17 +1,18 @@
 import { Request, Response } from "express";
 import { ApiResponse } from "../../utils/api-response";
 import { getStudentById, updateStudent } from "./students.service"
+import { asyncHandler } from "../../utils/async-handler";
 
-export const getStudentHandler = async (
+export const getStudentHandler = asyncHandler(async (
   req: Request,
   res: Response
 ) => {
   const id = req.params.id;
   const student = await getStudentById(parseInt(id));
   new ApiResponse(res, 200, student);
-}
+});
 
-export const updateStudentHandler = async (
+export const updateStudentHandler = asyncHandler(async (
   req: Request,
   res: Response
 ) => {
@@ -23,4 +24,4 @@ export const updateStudentHandler = async (
   );
 
   new ApiResponse(res, 200, student);
-}
+});

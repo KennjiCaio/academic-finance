@@ -19,7 +19,7 @@ const generateToken = (payload: { id: number; email: string }) => {
 };
 
 export const register = async (input: RegisterInput) => {
-  const { email, password, name } = input;
+  const { email, password, name, lastname } = input;
 
   const existingStudent = await prisma.student.findUnique({
     where: { email },
@@ -34,7 +34,7 @@ export const register = async (input: RegisterInput) => {
   const student = await prisma.student.create({
     data: {
       name,
-      lastname: name,
+      lastname,
       email,
       password: hashedPassword,
     },
@@ -45,13 +45,11 @@ export const register = async (input: RegisterInput) => {
     email: student.email
   });
 
-  const verified = jwt.verify(token, JWT_SECRET);
-  console.log('Token verificado:', verified);
-
   return {
     student: {
       id: student.id,
       name: student.name,
+      lastname: student.lastname,
       email: student.email,
     },
     token
@@ -80,15 +78,11 @@ export const login = async (input: LoginInput) => {
     email: student.email
   });
 
-
-  console.log('Token JWT_SECRET:', JWT_SECRET);
-  const verified = jwt.verify(token, JWT_SECRET);
-  console.log('Token verificado:', verified);
-
   return {
     student: {
       id: student.id,
       name: student.name,
+      lastname: student.lastname,
       email: student.email,
     },
     token

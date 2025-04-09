@@ -10,5 +10,5 @@ export const registerHandler = asyncHandler(async (req: Request, res: Response) 
 
 export const loginHandler = asyncHandler(async (req: Request, res: Response) => {
   const result = await login(req.body);
-  new ApiResponse(res, 200, result, 'Login successful');
+  new ApiResponse(res, 200, result);
 });

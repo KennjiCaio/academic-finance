@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { CreateSimulationInput } from './simulations.schema';
+import { CreateSimulationInput, SimulationOutput, simulationOutputSchema, SimulationsListOutput, simulationsListOutputSchema } from './simulations.schema';
 
 const prisma = new PrismaClient();
 
@@ -16,14 +16,14 @@ const calculateMonthlyPayment = (
 export const createSimulation = async (
   studentId: number, 
   input: CreateSimulationInput
-) => {
+):Promise<SimulationOutput> => {
   const monthlyPayment = calculateMonthlyPayment(
     input.total_amount,
     input.interest_per_month,
     input.total_installments
   );
 
-  return prisma.simulation.create({
+  const result = await prisma.simulation.create({
     data: {
       studentId,
       totalAmount: input.total_amount,
@@ -40,10 +40,14 @@ export const createSimulation = async (
       createdAt: true
     }
   });
+
+  return simulationOutputSchema.parse(result);
 };
 
-export const getStudentSimulations = async (studentId: number) => {
-  return prisma.simulation.findMany({
+export const getStudentSimulations = async (
+  studentId: number
+): Promise<SimulationsListOutput> => {  
+  const simulations = await prisma.simulation.findMany({
     where: { studentId },
     select: {
       id: true,
@@ -57,4 +61,6 @@ export const getStudentSimulations = async (studentId: number) => {
       createdAt: 'desc'
     }
   });
+
+  return simulationsListOutputSchema.parse(simulations);
 };

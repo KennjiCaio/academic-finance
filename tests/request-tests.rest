@@ -3,9 +3,9 @@ POST http://localhost:3000/api/register
 Content-Type: application/json
 
 {
-  "name": "Ana",
-  "lastname": "Silva",
-  "email": "ana2@exemplo.com",
+  "name": "novo",
+  "lastname": "usuario",
+  "email": "novo@exemplo.com",
   "password": "senhaSegura123"
 }
 
@@ -14,7 +14,7 @@ POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-  "email": "ana22@exemplo.com",
+  "email": "novo@exemplo.com",
   "password": "senhaSegura123"
 }
 
@@ -28,21 +28,21 @@ Content-Type: application/json
 }
 
 ###
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbmFAZXhlbXBsby5jb20iLCJpYXQiOjE3NDQxNTc3OTIsImV4cCI6MTc0NDE2MTM5Mn0.uehOEcnUD3_triviO62S1tJCiRs9u5qs1O_mGW6JWrM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJub3ZvQGV4ZW1wbG8uY29tIiwiaWF0IjoxNzQ0MjQwNDczLCJleHAiOjE3NDQyNDQwNzN9.K3AOlTLyOVpNK9S6khxEtXXYfXRyhq2Id-aoyyh5L2Y
 
 ### 4. Get student data
-GET http://localhost:3000/api/me/1
+GET http://localhost:3000/api/me/2
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 
 ### 5. Update student data
-PUT http://localhost:3000/api/me/1
+PUT http://localhost:3000/api/me/3
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "Ana Silva 3"
+  "name": "novo 2"
 }
 
 ### 6. Create simulation
@@ -52,8 +52,8 @@ Authorization: Bearer {{token}}
 
 {
   "total_amount": 1000,
-  "total_installments": 5,
-  "interest_per_month": 0.02
+  "total_installments": 10,
+  "interest_per_month": 0.05
 }
 
 ### 7. List simulations

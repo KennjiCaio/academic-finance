@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import { ApiError } from "../../utils/api-response";
-import { UpdateStudentInput } from "./students.schema";
+import { StudentOutput, studentOutputSchema, UpdateStudentInput } from "./students.schema";
 import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
-export async function getStudentById(studentId: number) {
+export async function getStudentById(studentId: number): Promise<StudentOutput> {
   const student = await prisma.student.findUnique({
     where: { id: studentId },
     select: {
@@ -22,25 +22,20 @@ export async function getStudentById(studentId: number) {
     throw new ApiError(404, 'Student not found');
   }
 
-  return student;
+  return studentOutputSchema.parse(student);
 }
 
 export async function updateStudent(
   studentId: number,
   data: UpdateStudentInput,
-  currentStudentId: number
-) {
-  if (studentId !== currentStudentId) {
-    throw new ApiError(403, 'Could not update a other person data');
-  }
-
+): Promise<StudentOutput> {
   const updateData: Partial<UpdateStudentInput> = { ...data };
 
   if (data.password) {
     updateData.password = await bcrypt.hash(data.password, 10);
   }
 
-  return prisma.student.update({
+  const student = await prisma.student.update({
     where: { id: studentId },
     data: updateData,
     select: {
@@ -52,4 +47,6 @@ export async function updateStudent(
       updatedAt: true,
     }
   });
+
+  return studentOutputSchema.parse(student);
 }

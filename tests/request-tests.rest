@@ -28,14 +28,13 @@ Content-Type: application/json
 
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbmFAZXhlbXBsby5jb20iLCJpYXQiOjE3NDQxNTc3OTIsImV4cCI6MTc0NDE2MTM5Mn0.uehOEcnUD3_triviO62S1tJCiRs9u5qs1O_mGW6JWrM
 
-### 1. Get student data
+### 4. Get student data
 GET http://localhost:3000/api/me/1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 
-
-### 2. Update student data
+### 5. Update student data
 PUT http://localhost:3000/api/me/1
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -43,3 +42,18 @@ Authorization: Bearer {{token}}
 {
   "name": "Ana Silva 3"
 }
+
+### 6. Create simulation
+POST http://localhost:3000/api/simulations
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "total_amount": 1000,
+  "total_installments": 5,
+  "interest_per_month": 0.02
+}
+
+### 7. List simulations
+GET http://localhost:3000/api/simulations
+Authorization: Bearer {{token}}

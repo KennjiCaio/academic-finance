@@ -10,13 +10,13 @@ studentRouter
   .get(
     '/:id',
     authenticate,
-    validate(getStudentSchema),
+    validate(getStudentSchema, 'params'),
     getStudentHandler,
   )
   .put(
     '/:id',
     authenticate,
-    validate(getStudentSchema),
+    validate(getStudentSchema, 'params'),
     validate(updateStudentSchema),
     updateStudentHandler
   );

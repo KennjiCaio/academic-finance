@@ -13,8 +13,7 @@ const generateToken = (payload: { id: number; email: string }) => {
     payload,
     JWT_SECRET,
     { 
-      expiresIn: '5m',
-      algorithm: 'HS256'
+      expiresIn: '1h',
     }
   );
 };
@@ -45,6 +44,9 @@ export const register = async (input: RegisterInput) => {
     id: student.id,
     email: student.email
   });
+
+  const verified = jwt.verify(token, JWT_SECRET);
+  console.log('Token verificado:', verified);
 
   return {
     student: {
@@ -77,6 +79,11 @@ export const login = async (input: LoginInput) => {
     id: student.id,
     email: student.email
   });
+
+
+  console.log('Token JWT_SECRET:', JWT_SECRET);
+  const verified = jwt.verify(token, JWT_SECRET);
+  console.log('Token verificado:', verified);
 
   return {
     student: {

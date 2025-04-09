@@ -1,10 +1,8 @@
 import { Student } from '@prisma/client';
 
-declare global {
-  namespace Express {
-    interface Request {
-      student?: Omit<Student, 'password' | 'createdAt' | 'updatedAt'>;
-      validatedData?: any;
-    }
+declare module 'express-serve-static-core' {
+  interface Request {
+    student?: Pick<Student, 'id' | 'name' | 'email' | 'lastname'>;
+    validatedData?: any;
   }
 }

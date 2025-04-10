@@ -1,34 +1,29 @@
-### 1. Registrar novo usuário
+### Follow rest requests to test some routes
+### Required: install REST Client extension
+
+### 1. Create a new user
 POST http://localhost:3000/api/register
 Content-Type: application/json
 
 {
-  "name": "novo",
-  "lastname": "usuario",
-  "email": "novo@exemplo.com",
+  "name": "Pedro",
+  "lastname": "Camargo",
+  "email": "pedro@mail.com",
   "password": "senhaSegura123"
 }
 
-### 2. Login com credenciais válidas
+### 2. Login with credentials
+# @name login_with_credentials
 POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-  "email": "novo@exemplo.com",
+  "email": "pedro@mail.com",
   "password": "senhaSegura123"
 }
 
-### 3. Login com credenciais inválidas (TESTE DE ERRO)
-POST http://localhost:3000/api/login
-Content-Type: application/json
-
-{
-  "email": "ana2@exemplo.com",
-  "password": "senhaErrada"
-}
-
-###
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJub3ZvQGV4ZW1wbG8uY29tIiwiaWF0IjoxNzQ0MjQwNDczLCJleHAiOjE3NDQyNDQwNzN9.K3AOlTLyOVpNK9S6khxEtXXYfXRyhq2Id-aoyyh5L2Y
+### References
+@token = {{login_with_credentials.response.body.data.token}}
 
 ### 4. Get student data
 GET http://localhost:3000/api/me/2
@@ -37,12 +32,12 @@ Authorization: Bearer {{token}}
 
 
 ### 5. Update student data
-PUT http://localhost:3000/api/me/3
+PUT http://localhost:3000/api/me/2
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "novo 2"
+  "name": "Felipe"
 }
 
 ### 6. Create simulation
@@ -51,7 +46,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "total_amount": 1000,
+  "total_amount": 3000,
   "total_installments": 10,
   "interest_per_month": 0.05
 }

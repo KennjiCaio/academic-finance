@@ -6,7 +6,6 @@ export const validate = (schema: AnyZodObject, target: 'body' | 'params' | 'quer
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await schema.safeParseAsync(req[target]);
-      console.log('@@Resources', result)
       
       if (!result.success) {
         const errors = result.error.errors.map((err) => ({

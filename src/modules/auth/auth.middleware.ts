@@ -3,7 +3,10 @@ import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
 import { ApiError } from '../../utils/api-response';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+if (!process.env.JWT_SECRET) {
+  throw new Error("FATAL: JWT_SECRET not defined in envs");
+}
+const JWT_SECRET = process.env.JWT_SECRET;
 const prisma = new PrismaClient();
 
 const handleJwtError = (error: unknown) => {

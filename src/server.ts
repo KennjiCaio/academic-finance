@@ -30,7 +30,7 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('Erro ao iniciar servidor: ', err);
+  console.error('Error starting server: ', err);
   process.exit(1);
 });
 

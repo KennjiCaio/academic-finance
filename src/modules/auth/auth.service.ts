@@ -4,8 +4,10 @@ import { PrismaClient } from '@prisma/client';
 import { RegisterInput, LoginInput } from './auth.schema';
 import { ApiError } from '../../utils/api-response';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret' as string;
-const EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1h'; // Alterar tempo de expiração
+if (!process.env.JWT_SECRET) {
+  throw new Error("FATAL: JWT_SECRET not defined in envs");
+}
+const JWT_SECRET = process.env.JWT_SECRET;
 const prisma = new PrismaClient();
 
 const generateToken = (payload: { id: number; email: string }) => {
@@ -13,7 +15,7 @@ const generateToken = (payload: { id: number; email: string }) => {
     payload,
     JWT_SECRET,
     { 
-      expiresIn: '1h',
+      expiresIn: '5m',
     }
   );
 };
